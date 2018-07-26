@@ -1,4 +1,4 @@
-# CBT Nuggets React Developer Test
+# Cognizant Test
 
 An Node / Express / React application using the Dark Sky API
 
