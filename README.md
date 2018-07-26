@@ -20,7 +20,7 @@ This application allows users to enter coordinates to return the current weather
 npm install
 
 ### running the project
-npm start, npm run dev
+npm run dev
 
 ### building for production
 npm run build

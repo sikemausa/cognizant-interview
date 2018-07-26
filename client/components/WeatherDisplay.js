@@ -8,15 +8,15 @@ class WeatherDisplay extends React.Component {
     super();
     this.state = {
       weatherData: null,
-      latitude: '',
-      longitute: '',
+      lat: '',
+      lon: '',
       loading: false,
     };
   }
 
   onSubmit(e) {
     e.preventDefault();
-    this.getWeatherData(this.state.latitude, this.state.longitude);
+    this.getWeatherData(this.state.lat, this.state.lon);
     this.setState({ loading: true });
   }
 
@@ -28,16 +28,15 @@ class WeatherDisplay extends React.Component {
     }).then((res) => {
       this.setState({
         weatherData: res.data.currently,
-        latitude: '',
-        longitude: '',
+        lat: '',
+        lon: '',
         loading: false,
       });
     });
   }
 
-  updateInput(e, input) {
-    if (input === 'lat') this.setState({ latitude: e.target.value });
-    if (input === 'lon') this.setState({ longitude: e.target.value });
+  updateInput(e) {
+    this.setState({ [e.target.id]: e.target.value });
   }
 
   render() {
@@ -60,24 +59,26 @@ class WeatherDisplay extends React.Component {
         <div className="lat-lon-input-container">
           <div className="lat-lon-inputs">
             <input
+              id="lat"
               className="coordinate-entry"
               type="text"
-              value={this.state.latitude || ''}
-              onChange={e => this.updateInput(e, 'lat')}
+              value={this.state.lat || ''}
+              onChange={e => this.updateInput(e)}
               placeholder="Enter Latitude"
             />
             <input
+              id="lon"
               className="coordinate-entry"
               type="text"
-              value={this.state.longitude || ''}
-              onChange={e => this.updateInput(e, 'lon')}
+              value={this.state.lon || ''}
+              onChange={e => this.updateInput(e)}
               placeholder="Enter Longitude"
             />
           </div>
           <button
             className="coordinate-entry submit-button"
             onClick={e => this.onSubmit(e)}
-            disabled={(!this.state.latitude || !this.state.longitude)}
+            disabled={(!this.state.lat || !this.state.lon)}
           >Submit</button>
         </div>
         {renderDisplay}
